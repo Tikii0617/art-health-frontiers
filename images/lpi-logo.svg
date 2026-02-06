@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
+  <!-- Teal/Green blob (bottom left) -->
+  <path d="M60,130 C30,100 20,160 40,200 C50,230 60,270 100,290 C140,310 180,300 200,270 C220,240 210,200 190,170 C170,140 140,130 120,140 C100,150 90,160 60,130Z" fill="#5EC4B6" />
+  <path d="M60,130 C30,100 20,160 40,200 C50,230 60,270 100,290 C140,310 180,300 200,270 C220,240 210,200 190,170 C170,140 140,130 120,140 C100,150 90,160 60,130Z" fill="none" stroke="#3aa89a" stroke-width="0.8" opacity="0.4"/>
+  <!-- Wavy lines on teal blob -->
+  <path d="M50,155 Q90,145 130,165 Q170,185 195,195" fill="none" stroke="#3aa89a" stroke-width="0.8" opacity="0.3"/>
+  <path d="M45,175 Q85,160 125,180 Q165,200 200,215" fill="none" stroke="#3aa89a" stroke-width="0.8" opacity="0.3"/>
+  <path d="M42,195 Q82,180 122,200 Q162,220 195,240" fill="none" stroke="#3aa89a" stroke-width="0.8" opacity="0.3"/>
+  <path d="M48,215 Q88,200 125,220 Q160,240 185,260" fill="none" stroke="#3aa89a" stroke-width="0.8" opacity="0.3"/>
+  <path d="M60,235 Q95,220 130,240 Q160,258 175,275" fill="none" stroke="#3aa89a" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Blue blob (top center) -->
+  <path d="M150,30 C120,20 100,50 110,80 C115,100 130,130 160,140 C190,150 220,140 240,115 C260,90 250,55 230,40 C210,25 180,40 150,30Z" fill="#6BC4E8" />
+  <path d="M140,50 Q170,45 200,60 Q230,75 245,95" fill="none" stroke="#4aa8cc" stroke-width="0.8" opacity="0.3"/>
+  <path d="M125,65 Q155,55 185,70 Q215,85 240,105" fill="none" stroke="#4aa8cc" stroke-width="0.8" opacity="0.3"/>
+  <path d="M115,80 Q145,70 175,85 Q205,100 235,115" fill="none" stroke="#4aa8cc" stroke-width="0.8" opacity="0.3"/>
+  <path d="M115,95 Q145,85 175,100 Q200,115 220,130" fill="none" stroke="#4aa8cc" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Pink/Purple blob (top left) -->
+  <path d="M90,25 C65,15 45,35 50,60 C55,80 70,110 95,115 C120,120 145,105 150,80 C155,55 140,35 120,25 C105,18 95,25 90,25Z" fill="#C9A0D6" />
+  <path d="M62,40 Q85,35 108,50 Q130,65 145,80" fill="none" stroke="#a880b6" stroke-width="0.8" opacity="0.3"/>
+  <path d="M55,55 Q80,48 103,60 Q125,75 142,90" fill="none" stroke="#a880b6" stroke-width="0.8" opacity="0.3"/>
+  <path d="M53,70 Q78,60 100,75 Q120,88 138,100" fill="none" stroke="#a880b6" stroke-width="0.8" opacity="0.3"/>
+  <path d="M58,85 Q80,75 100,88 Q115,100 125,110" fill="none" stroke="#a880b6" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Salmon/Peach blob (right) -->
+  <path d="M220,120 C200,100 195,140 200,170 C205,200 215,250 250,275 C285,300 330,290 350,255 C370,220 360,175 335,150 C310,125 280,130 260,145 C240,160 240,140 220,120Z" fill="#E8A992" />
+  <path d="M215,150 Q250,140 285,160 Q320,180 350,205" fill="none" stroke="#c88a72" stroke-width="0.8" opacity="0.3"/>
+  <path d="M210,170 Q245,158 280,175 Q315,195 345,225" fill="none" stroke="#c88a72" stroke-width="0.8" opacity="0.3"/>
+  <path d="M207,190 Q242,178 278,195 Q312,215 340,245" fill="none" stroke="#c88a72" stroke-width="0.8" opacity="0.3"/>
+  <path d="M210,210 Q245,198 280,215 Q310,235 335,260" fill="none" stroke="#c88a72" stroke-width="0.8" opacity="0.3"/>
+  <path d="M218,230 Q248,220 278,238 Q305,255 325,275" fill="none" stroke="#c88a72" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Yellow blob (top right) -->
+  <path d="M280,20 C265,10 250,25 255,45 C258,60 268,80 285,85 C302,90 318,78 322,60 C326,42 315,25 300,18 C290,13 285,20 280,20Z" fill="#F0D050" />
+  <path d="M260,32 Q275,28 290,38 Q305,48 318,60" fill="none" stroke="#c8a830" stroke-width="0.8" opacity="0.3"/>
+  <path d="M258,45 Q273,40 288,50 Q303,60 315,72" fill="none" stroke="#c8a830" stroke-width="0.8" opacity="0.3"/>
+  <path d="M260,58 Q275,52 288,62 Q300,72 310,82" fill="none" stroke="#c8a830" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Text: LEARNING PLANET INSTITUTE -->
+  <text x="55" y="188" font-family="Arial Black, Arial, sans-serif" font-size="52" font-weight="900" fill="#1a1a2e" letter-spacing="2">LEARNING</text>
+  <text x="55" y="240" font-family="Arial Black, Arial, sans-serif" font-size="52" font-weight="900" fill="#1a1a2e" letter-spacing="2">PLANET</text>
+  <text x="55" y="292" font-family="Arial Black, Arial, sans-serif" font-size="52" font-weight="900" fill="#1a1a2e" letter-spacing="2">INSTITUTE</text>
+</svg>
