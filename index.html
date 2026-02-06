@@ -1,189 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>On the Frontiers of Art & Health</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On the Frontiers of Art & Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== 基础重置 & 全局样式 ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  --coral: #FF6B6B;
-  --magenta: #E040A0;
-  --purple: #7B2FBE;
-  --deep-blue: #1A1A4E;
-  --teal: #00C9A7;
-  --gold: #FFD93D;
-  --peach: #FFB4A2;
-  --lavender: #B8B8FF;
-  --off-white: #FFF8F5;
-  --text-dark: #1A1A2E;
-}
+        :root {
+            --coral: #FF6B6B;
+            --magenta: #E040A0;
+            --purple: #7B2FBE;
+            --deep-blue: #1A1A4E;
+            --teal: #00C9A7;
+            --gold: #FFD93D;
+            --peach: #FFB4A2;
+            --lavender: #B8B8FF;
+            --off-white: #FFF8F5;
+            --text-dark: #1A1A2E;
+        }
 
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
-/* 全局字体修改为 Outfit */
-body {
-  font-family: 'Outfit', sans-serif;
-  background-color: var(--off-white);
-  color: var(--text-dark);
-  -webkit-font-smoothing: antialiased; /* 字体抗锯齿优化 */
-  -moz-osx-font-smoothing: grayscale;
-}
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
 
-/* ===== NAVIGATION ===== */
-.navbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  padding: 1.2rem 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        /* ===== 进度条 & 回到顶部 ===== */
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 1100;
+            background: linear-gradient(90deg, var(--coral), var(--magenta), var(--gold));
+            width: 0%; transition: width 0.1s;
+        }
 
-.navbar.scrolled {
-  background: rgba(26, 26, 78, 0.9);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 0.8rem 2.5rem;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-}
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px;
+            background: var(--magenta); color: white; border: none; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: 0.4s; z-index: 999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
 
-.nav-logo-img {
-  height: 42px; /* 稍微缩小高度，显得更精致 */
-  width: auto;
-  transition: all 0.3s;
-  /* 关键修改：将彩色 Logo 转化为纯白并保持锐利 */
-  filter: brightness(0) invert(1);
-}
+        /* ===== 导航栏 (NAVBAR) ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.2rem 2.5rem; display: flex; align-items: center;
+            justify-content: space-between; transition: 0.4s ease;
+        }
 
-.nav-logo:hover .nav-logo-img { transform: scale(1.05); }
+        .navbar.scrolled {
+            background: rgba(26, 26, 78, 0.95);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 0.8rem 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
 
-.nav-links { display: flex; align-items: center; gap: 0.5rem; list-style: none; }
+        .nav-logo-img {
+            height: 45px; width: auto; transition: 0.3s;
+            /* 重点：锐化并变白 */
+            filter: brightness(0) invert(1);
+        }
+        .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
 
-.nav-links a {
-  text-decoration: none; color: rgba(255,255,255,0.8);
-  font-size: 0.9rem; font-weight: 400;
-  padding: 0.6rem 1.2rem; border-radius: 50px;
-  transition: all 0.3s;
-}
+        .nav-links { display: flex; align-items: center; gap: 0.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: rgba(255,255,255,0.75);
+            font-size: 0.9rem; font-weight: 500; padding: 0.6rem 1.2rem;
+            border-radius: 50px; transition: 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.1); }
+        
+        .nav-cta {
+            background: linear-gradient(135deg, var(--coral), var(--magenta)) !important;
+            color: white !important; font-weight: 600 !important;
+        }
 
-.nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.1); }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { width: 25px; height: 2px; background: white; border-radius: 2px; }
 
-.nav-cta {
-  background: linear-gradient(135deg, var(--coral), var(--magenta)) !important;
-  color: white !important;
-  font-weight: 600 !important;
-  padding: 0.6rem 1.5rem !important;
-  box-shadow: 0 4px 15px rgba(224,64,160,0.3);
-}
+        /* ===== HERO板块 ===== */
+        .hero {
+            min-height: 100vh; position: relative; display: flex;
+            align-items: center; justify-content: center; text-align: center;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('images/art_hero.jpg') center/cover no-repeat;
+            z-index: -1;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(26,26,78,0.85) 0%, rgba(123,47,190,0.65) 100%);
+        }
 
-/* ===== HERO SECTION ===== */
-.hero {
-  min-height: 100vh;
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-}
+        .hero-content { position: relative; z-index: 2; color: white; padding: 2rem; max-width: 950px; }
+        
+        .hero-badge {
+            display: inline-block; padding: 0.5rem 1.5rem; border-radius: 50px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 2rem;
+        }
 
-.hero-bg {
-  position: absolute; inset: 0;
-  background: url('images/art_hero.jpg') center/cover no-repeat;
-}
+        .hero-title {
+            font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700;
+            line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+            text-shadow: none; /* 移除阴影保持锐利 */
+        }
+        .hero-title span {
+            display: block; background: linear-gradient(90deg, var(--gold), var(--peach), var(--teal));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
 
-.hero-bg::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, 
-    rgba(26,26,78,0.85) 0%, 
-    rgba(123,47,190,0.6) 100%);
-}
+        .hero-subtitle { font-size: clamp(1.1rem, 2.5vw, 1.4rem); opacity: 0.9; margin-bottom: 3rem; font-weight: 300; }
 
-.hero-content {
-  position: relative; z-index: 2;
-  text-align: center; color: white;
-  padding: 2rem; max-width: 1000px;
-}
+        .cta-btn {
+            display: inline-block; padding: 1.2rem 3.5rem; border-radius: 60px;
+            background: linear-gradient(135deg, var(--coral), var(--magenta));
+            color: white; text-decoration: none; font-weight: 600; font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(224,64,160,0.4); transition: 0.3s;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(224,64,160,0.5); }
 
-.hero-badge {
-  display: inline-block;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50px; padding: 0.5rem 1.5rem;
-  font-size: 0.8rem; font-weight: 500;
-  letter-spacing: 2px; text-transform: uppercase;
-  margin-bottom: 2.5rem;
-}
+        /* ===== 通用板块样式 ===== */
+        section { padding: 8rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-label { color: var(--magenta); letter-spacing: 3px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 1rem; }
+        .section-title { font-size: clamp(2.2rem, 4.5vw, 3rem); font-weight: 700; color: var(--deep-blue); margin-bottom: 2rem; letter-spacing: -0.02em; }
 
-.hero-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  font-weight: 700; 
-  line-height: 1.05;
-  margin-bottom: 1.5rem;
-  letter-spacing: -0.03em; /* 紧凑字间距增加高级感 */
-  text-shadow: none; /* 彻底删除阴影，解决模糊问题 */
-}
+        /* 关于板块 */
+        .about-quote {
+            font-size: 1.6rem; font-weight: 600; color: var(--purple); font-style: italic;
+            text-align: center; padding: 3rem 0; position: relative; margin: 3rem 0;
+        }
+        .about-quote::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--coral); }
 
-.hero-title span {
-  display: block;
-  background: linear-gradient(90deg, var(--gold), #FFB4A2, var(--teal));
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent;
-}
+        /* 画廊 (Gallery) */
+        .gallery-strip { background: var(--deep-blue); padding: 4rem 0; overflow: hidden; }
+        .gallery-scroll { display: flex; gap: 1.5rem; animation: scrollGallery 40s linear infinite; width: max-content; }
+        .gallery-item { width: 300px; height: 300px; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        @keyframes scrollGallery { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-.hero-subtitle {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 300; 
-  max-width: 800px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-  opacity: 0.9;
-}
+        /* 演讲者 (Speakers) */
+        .speakers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3rem; margin-top: 3rem; }
+        .speaker-card { text-align: center; cursor: pointer; transition: 0.3s; }
+        .speaker-photo { width: 190px; height: 190px; border-radius: 50%; border: 4px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 1.5rem; object-fit: cover; }
+        .speaker-name { font-size: 1.3rem; font-weight: 700; color: var(--deep-blue); }
 
-.hero-keywords {
-  display: flex; gap: 1rem;
-  justify-content: center; flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
+        /* 日程表 (Timeline) */
+        .timeline { position: relative; padding-left: 3rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(var(--coral), var(--purple)); border-radius: 4px; }
+        .timeline-item { position: relative; margin-bottom: 3.5rem; cursor: pointer; }
+        .timeline-dot { position: absolute; left: -58px; top: 5px; width: 22px; height: 22px; border-radius: 50%; background: white; border: 4px solid var(--magenta); }
+        .timeline-time { color: var(--magenta); font-weight: 700; font-size: 0.95rem; }
+        .timeline-title { font-size: 1.4rem; font-weight: 600; color: var(--deep-blue); }
+        .timeline-desc { color: #555; margin-top: 0.5rem; }
 
-.hero-keywords span {
-  font-weight: 400; letter-spacing: 1px;
-}
+        /* 弹窗 (Modal) */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(26,26,78,0.8); backdrop-filter: blur(10px);
+            z-index: 2000; display: none; align-items: center; justify-content: center; padding: 2rem;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-content { background: white; padding: 3rem; border-radius: 30px; max-width: 600px; width: 100%; position: relative; }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; border: none; font-size: 2rem; cursor: pointer; background: none; }
 
-.hero-keywords .dot { color: var(--gold); }
+        /* 动画 */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-.cta-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--coral), var(--magenta));
-  color: white; text-decoration: none;
-  padding: 1.2rem 3.5rem; border-radius: 60px;
-  font-size: 1.1rem; font-weight: 600;
-  transition: all 0.3s;
-  box-shadow: 0 10px 30px rgba(224,64,160,0.4);
-}
-
-.cta-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(224,64,160,0.5);
-}
-
-/* ===== 其它通用部分 (基于新字体微调) ===== */
-.section-title {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.speaker-name, .timeline-title, .modal-name {
-  font-family: 'Outfit', sans-serif;
-}
-
-/* 此处省略你代码中未涉及字体的动画和布局逻辑... */
-/* 你可以直接将这段 CSS 覆盖到你原有的 <style> 标签中 */
-
-</style>
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            section { padding: 5rem 1.5rem; }
+        }
+    </style>
 </head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="images/lpi_logo_cmjn.png" alt="LPI Logo" class="nav-logo-img">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Artworks</a></li>
+            <li><a href="#speakers">Speakers</a></li>
+            <li><a href="#programme">Programme</a></li>
+            <li><a href="https://form.typeform.com/to/gS5MkSrc" class="nav-cta">Register Now</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">Learning Planet Institute</div>
+            <h1 class="hero-title reveal">
+                On the Frontiers of<br>
+                <span>Art & Health</span>
+            </h1>
+            <p class="hero-subtitle reveal">Listening · Sensing · Transforming · Becoming</p>
+            <a href="https://form.typeform.com/to/gS5MkSrc" target="_blank" class="cta-btn reveal">Register Now &rarr;</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container reveal">
+            <div class="section-label">Where Art Meets Science</div>
+            <h2 class="section-title">Beyond Creative Production</h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #444;">Across cultures and centuries, music and visual expression have been regulators of physiological states and portals to health. Our mission is to bridge subjective art with objective measurement.</p>
+            <div class="about-quote">"Art is not an accessory to health — it is a pathway to it."</div>
+        </div>
+    </section>
+
+    <section class="gallery-strip" id="gallery">
+        <div class="gallery-scroll">
+            <div class="gallery-item"><img src="images/gallery1.jpg" alt="Art 1"></div>
+            <div class="gallery-item"><img src="images/gallery2.jpg" alt="Art 2"></div>
+            <div class="gallery-item"><img src="images/gallery3.jpg" alt="Art 3"></div>
+            <div class="gallery-item"><img src="images/gallery4.jpg" alt="Art 4"></div>
+            <div class="gallery-item"><img src="images/gallery1.jpg" alt="Art 1"></div>
+            <div class="gallery-item"><img src="images/gallery2.jpg" alt="Art 2"></div>
+        </div>
+    </section>
+
+    <section class="speakers" id="speakers">
+        <div class="container">
+            <div class="section-label reveal">Our Experts</div>
+            <h2 class="section-title reveal">Meet the Facilitators</h2>
+            <div class="speakers-grid">
+                <div class="speaker-card reveal" onclick="openSpeakerModal('isabelle')">
+                    <img src="images/isabelle.jpg" class="speaker-photo" alt="Isabelle">
+                    <div class="speaker-name">Isabelle Wachsmuth</div>
+                    <div style="color: var(--magenta)">Art & Health, WHO</div>
+                </div>
+                <div class="speaker-card reveal" onclick="openSpeakerModal('laura')">
+                    <img src="images/laura.jpg" class="speaker-photo" alt="Laura">
+                    <div class="speaker-name">Dr. Laura Nasi</div>
+                    <div style="color: var(--magenta)">Integrative Oncology</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="programme" id="programme">
+        <div class="container">
+            <div class="section-label reveal">The Schedule</div>
+            <h2 class="section-title reveal">Afternoon Programme</h2>
+            <div class="timeline stagger">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">14:00 - 14:15</div>
+                    <div class="timeline-title">Welcome & Installation</div>
+                    <p class="timeline-desc">Gathering at the Learning Center, calm atmosphere and registration.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">14:15 - 15:20</div>
+                    <div class="timeline-title">Art, Health & Planetary Framework</div>
+                    <p class="timeline-desc">International SDGs, Mind-body medicine and scientific data from WHO.</p>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">15:20 - 17:20</div>
+                    <div class="timeline-title">Immersive Workshops</div>
+                    <p class="timeline-desc">Art Therapy, Cosmic Art, and Narrative Writing sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="speakerModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSpeakerModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <button class="back-to-top" id="backToTop">&uarr;</button>
+
+    <script>
+        // 1. 进度条 & 导航栏变色
+        const navbar = document.getElementById('navbar');
+        const progressBar = document.getElementById('progressBar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (scrollY / docHeight) * 100 + '%';
+
+            if (scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+
+            if (scrollY > 600) backToTop.classList.add('visible');
+            else backToTop.classList.remove('visible');
+        });
+
+        backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // 2. 演讲者弹窗逻辑
+        const speakerData = {
+            isabelle: { name: "Isabelle Wachsmuth", bio: "Mrs Isabelle Wachsmuth is an expert at WHO leading Art Impact for Health initiative..." },
+            laura: { name: "Dr. Laura Nasi", bio: "Dr. Laura Nasi is an oncology expert bridging medicine and creativity..." }
+        };
+
+        function openSpeakerModal(id) {
+            const modal = document.getElementById('speakerModal');
+            document.getElementById('modalBody').innerHTML = `
+                <h2 style="margin-bottom:1rem">${speakerData[id].name}</h2>
+                <p style="line-height:1.7">${speakerData[id].bio}</p>
+            `;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSpeakerModal() {
+            document.getElementById('speakerModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // 3. 滚动显现动画 (Scroll Reveal)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
