@@ -898,8 +898,111 @@ footer a:hover { text-decoration: underline; }
   transition: width 0.1s linear; width: 0%;
 }
 
+/* ===== HIGHLIGHTS STRIP ===== */
+.highlights-strip {
+  background: var(--deep-blue);
+  padding: 4rem 2rem;
+  position: relative; overflow: hidden;
+}
+
+.highlights-strip::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('images/art_dark.jpg') center/cover no-repeat;
+  opacity: 0.1;
+}
+
+.highlights-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; max-width: 1100px; margin: 0 auto;
+}
+
+.highlight-stat { color: white; }
+
+.highlight-stat::before {
+  content: ''; display: block;
+  width: 50px; height: 2px;
+  background: rgba(255,255,255,0.5);
+  margin-bottom: 1.2rem;
+}
+
+.highlight-stat h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem; font-weight: 500;
+  line-height: 1.5; color: rgba(255,255,255,0.9);
+}
+
+/* ===== LOCATION SECTION ===== */
+.location { background: white; }
+
+.location-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 3rem; margin-top: 3rem; align-items: start;
+}
+
+.location-map {
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  border: 3px solid rgba(0,0,0,0.05);
+}
+
+.location-map iframe {
+  width: 100%; height: 360px; border: none; display: block;
+}
+
+.location-info { display: flex; flex-direction: column; gap: 2rem; }
+
+.location-card {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+}
+
+.location-card-icon {
+  width: 52px; height: 52px; border-radius: 16px;
+  flex-shrink: 0; display: flex;
+  align-items: center; justify-content: center; font-size: 1.5rem;
+}
+
+.location-card:nth-child(1) .location-card-icon { background: linear-gradient(135deg, #FFE8E8, #FFD0D0); }
+.location-card:nth-child(2) .location-card-icon { background: linear-gradient(135deg, #E8F0FF, #D0E0FF); }
+.location-card:nth-child(3) .location-card-icon { background: linear-gradient(135deg, #E8FFF0, #D0F5E0); }
+
+.location-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--deep-blue); margin-bottom: 0.3rem;
+}
+
+.location-card p { font-size: 0.92rem; color: #666; line-height: 1.6; }
+
+/* ===== PARTNERS SECTION ===== */
+.partners { background: var(--off-white); padding: 4rem 2rem; }
+.partners .container { text-align: center; }
+.partners .section-label { text-align: center; }
+.partners .section-title { text-align: center; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 2.5rem; }
+
+.partners-grid {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+  gap: 2.5rem 3.5rem; max-width: 900px; margin: 0 auto;
+}
+
+.partner-logo {
+  height: 55px; width: auto; max-width: 180px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.3s;
+  filter: grayscale(30%);
+}
+
+.partner-logo:hover {
+  opacity: 1; transform: scale(1.08);
+  filter: grayscale(0%);
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
+  .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+  .location-grid { grid-template-columns: 1fr; }
   .speakers-grid { grid-template-columns: repeat(2, 1fr); }
   .diff-grid { grid-template-columns: 1fr; }
   .gallery-item { width: 220px; height: 220px; }
@@ -915,6 +1018,9 @@ footer a:hover { text-decoration: underline; }
   .timeline-dot { left: 6px; }
   .back-to-top { bottom: 1.25rem; right: 1.25rem; width: 42px; height: 42px; }
   .gallery-item { width: 180px; height: 180px; }
+  .highlights-grid { grid-template-columns: 1fr; }
+  .partners-grid { gap: 1.5rem 2rem; }
+  .partner-logo { height: 40px; }
   .modal-content { border-radius: 20px; }
   .modal-header, .modal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
@@ -1024,12 +1130,13 @@ footer a:hover { text-decoration: underline; }
   </div>
 </section>
 
+
 <!-- ===== ARTWORK GALLERY ===== -->
 <section class="gallery-strip" id="gallery">
   <div class="gallery-strip-header reveal">
     <div class="section-label">Featured Artworks</div>
-    <h2 class="section-title">Cosmic Art by Isabelle Wachsmuth</h2>
-    <p>Be inspired: Cosmic Art by Isabelle Wachsmuth</p>
+    <h2 class="section-title">Be inspired: Cosmic Art by Isabelle Wachsmuth</h2>
+  
   </div>
   <div class="gallery-scroll">
     <div class="gallery-item"><img src="images/gallery1.jpg" alt="Cosmic Art 1" loading="lazy"></div>
@@ -1236,6 +1343,38 @@ footer a:hover { text-decoration: underline; }
   </div>
 </section>
 
+<!-- ===== WHY JOIN ===== -->
+<section class="different" id="different">
+  <div class="different-bg"></div>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Why Join?</div>
+      <h2 class="section-title">What Makes This Event Different</h2>
+    </div>
+    <div class="diff-grid stagger">
+      <div class="diff-card reveal">
+        <div class="diff-icon">&#128300;</div>
+        <h3>Evidence-Based</h3>
+        <p>Without reducing the richness of human experience. Science and sensitivity go hand in hand.</p>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-icon">&#129504;</div>
+        <h3>Experiential &amp; Embodied</h3>
+        <p>This is not a lecture &mdash; it's a participatory exploration where you'll engage body and mind.</p>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-icon">&#127760;</div>
+        <h3>Transdisciplinary</h3>
+        <p>Bridging health, art, planetary health, and medicine in a truly integrative approach.</p>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-icon">&#129309;</div>
+        <h3>Collective &amp; Inclusive</h3>
+        <p>No performance, no judgment, no obligation. A safe and respectful space for all.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== WHAT TO EXPECT ===== -->
 <section class="expect" id="expect">
@@ -1292,8 +1431,62 @@ footer a:hover { text-decoration: underline; }
   </div>
 </section>
 
+<!-- ===== LOCATION ===== -->
+<section class="location" id="location">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Event Location</div>
+      <h2 class="section-title">How to Find Us</h2>
+    </div>
+    <div class="location-grid">
+      <div class="location-map reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.4!2d2.3608!3d48.8533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671ff5daed!2sLearning+Planet+Institute!5e0!3m2!1sfr!2sfr!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Learning Planet Institute location"></iframe>
+      </div>
+      <div class="location-info">
+        <div class="location-card reveal">
+          <div class="location-card-icon">&#128205;</div>
+          <div>
+            <h3>Address</h3>
+            <p>Learning Planet Institute<br>8 bis Rue Charles V<br>75004 Paris, France</p>
+          </div>
+        </div>
+        <div class="location-card reveal">
+          <div class="location-card-icon">&#128647;</div>
+          <div>
+            <h3>Metro Access</h3>
+            <p>5 minutes walk from<br><strong>Saint-Paul Station</strong> &mdash; Metro Line 1</p>
+          </div>
+        </div>
+        <div class="location-card reveal">
+          <div class="location-card-icon">&#128338;</div>
+          <div>
+            <h3>Event Hours</h3>
+            <p>Wednesday, February 25<br>2:00 PM &mdash; 6:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-
+<!-- ===== PARTNERS ===== -->
+<section class="partners">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Our Partners</div>
+      <h2 class="section-title">Supported By</h2>
+    </div>
+    <div class="partners-grid reveal">
+      <img src="images/Logo_Universit%C3%A9_Paris-Cit%C3%A9).svg" alt="Université Paris Cité" class="partner-logo">
+      <img src="images/Graduate_School_Ecole-Universitaire-de-Recherche-Interdisciplinaire-1200px2.png" alt="EUR Interdisciplinaire de Paris" class="partner-logo">
+      <img src="images/5179248_lpi_logo_rvb.png" alt="Learning Planet Institute" class="partner-logo">
+      <img src="images/ANR-logo.png" alt="ANR" class="partner-logo">
+      <img src="images/Fondation_Bettencourt_Schueller-logo.svg.png" alt="Fondation Bettencourt Schueller" class="partner-logo">
+      <img src="images/inserm-logo.png" alt="Inserm" class="partner-logo">
+      <img src="images/LOGO-PSL.png" alt="PSL Université Paris" class="partner-logo">
+    </div>
+  </div>
+</section>
 
 <!-- ===== FOOTER ===== -->
 <footer>
